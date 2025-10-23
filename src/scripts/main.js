@@ -5,7 +5,9 @@ import { Game } from '../modules/Game.class.js';
 const startBtn = document.querySelector('.button.start');
 const restartBtn = document.querySelector('.button.restart');
 const scoreEl = document.querySelector('.game-score');
-const messageContainer = document.querySelector('.message-container'); 
+const messageContainer = document.querySelector('.message-container');
+void messageContainer; // zapobiega błędowi 'assigned but never used'
+
 const loseMessage = document.querySelector('.message-lose');
 const winMessage = document.querySelector('.message-win');
 const startMessage = document.querySelector('.message-start');
