@@ -5,6 +5,7 @@ import { Game } from '../modules/Game.class.js';
 const startBtn = document.querySelector('.button.start');
 const restartBtn = document.querySelector('.button.restart');
 const scoreEl = document.querySelector('.game-score');
+
 const loseMessage = document.querySelector('.message-lose');
 const winMessage = document.querySelector('.message-win');
 const startMessage = document.querySelector('.message-start');
@@ -28,21 +29,6 @@ function render() {
   }
 
   startMessage.classList.add('hidden');
-
-  // Aktualizacja komórek na planszy
-  game.getState().forEach((row, rowIndex) => {
-    row.forEach((cellValue, colIndex) => {
-      const cell = document.querySelector(
-        `.field-row:nth-child(${rowIndex + 1}) .field-cell:nth-child(${colIndex + 1})`
-      );
-      cell.textContent = cellValue === 0 ? '' : cellValue;
-      // Usuń wcześniejsze klasy wartości
-      cell.className = 'field-cell';
-      if (cellValue !== 0) {
-        cell.classList.add(`field-cell--${cellValue}`);
-      }
-    });
-  });
 }
 
 // Obsługa przycisku Start
@@ -79,4 +65,3 @@ document.addEventListener('keydown', (e) => {
   }
   render();
 });
-
