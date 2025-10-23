@@ -2,13 +2,10 @@
 // src/scripts/main.js
 import { Game } from '../modules/Game.class.js';
 
-// const Game = require('../modules/Game.class');
-
 const startBtn = document.querySelector('.button.start');
 const restartBtn = document.querySelector('.button.restart');
 const scoreEl = document.querySelector('.game-score');
 const messageContainer = document.querySelector('.message-container'); 
-
 const loseMessage = document.querySelector('.message-lose');
 const winMessage = document.querySelector('.message-win');
 const startMessage = document.querySelector('.message-start');
@@ -17,7 +14,7 @@ const game = new Game();
 
 // Funkcja do aktualizacji UI
 function render() {
-  const board = game.getState(); 
+  const board = game.getState(); // eslint-disable-line no-unused-vars
   scoreEl.textContent = game.getScore();
 
   // Aktualizacja statusu gry
@@ -34,7 +31,6 @@ function render() {
   }
 
   startMessage.classList.add('hidden');
-
   // TODO: Aktualizacja komórek na planszy
 }
 
@@ -53,8 +49,8 @@ restartBtn.addEventListener('click', () => {
 });
 
 // Obsługa klawiszy strzałek
-document.addEventListener('keydown', (e) => { 
-  switch (e.key) {
+document.addEventListener('keydown', (evt) => {
+  switch (evt.key) {
     case 'ArrowLeft':
       game.moveLeft();
       break;
@@ -72,4 +68,5 @@ document.addEventListener('keydown', (e) => {
   }
   render();
 });
+
 
