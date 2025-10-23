@@ -4,7 +4,7 @@ import { Game } from '../modules/Game.class.js';
 
 const startBtn = document.querySelector('.button.start');
 const restartBtn = document.querySelector('.button.restart');
-const scoreEl = document.querySelector('.game-score'); 
+const scoreEl = document.querySelector('.game-score');
 const loseMessage = document.querySelector('.message-lose');
 const winMessage = document.querySelector('.message-win');
 const startMessage = document.querySelector('.message-start');
@@ -13,10 +13,8 @@ const game = new Game();
 
 // Funkcja do aktualizacji UI
 function render() {
-  const board = game.getState(); // eslint-disable-line no-unused-vars
   scoreEl.textContent = game.getScore();
 
-  // Aktualizacja statusu gry
   if (game.getStatus() === 'win') {
     winMessage.classList.remove('hidden');
   } else {
@@ -30,7 +28,21 @@ function render() {
   }
 
   startMessage.classList.add('hidden');
-  // TODO: Aktualizacja komórek na planszy
+
+  // Aktualizacja komórek na planszy
+  game.getState().forEach((row, rowIndex) => {
+    row.forEach((cellValue, colIndex) => {
+      const cell = document.querySelector(
+        `.field-row:nth-child(${rowIndex + 1}) .field-cell:nth-child(${colIndex + 1})`
+      );
+      cell.textContent = cellValue === 0 ? '' : cellValue;
+      // Usuń wcześniejsze klasy wartości
+      cell.className = 'field-cell';
+      if (cellValue !== 0) {
+        cell.classList.add(`field-cell--${cellValue}`);
+      }
+    });
+  });
 }
 
 // Obsługa przycisku Start
@@ -48,8 +60,8 @@ restartBtn.addEventListener('click', () => {
 });
 
 // Obsługa klawiszy strzałek
-document.addEventListener('keydown', (evt) => {
-  switch (evt.key) {
+document.addEventListener('keydown', (e) => {
+  switch (e.key) {
     case 'ArrowLeft':
       game.moveLeft();
       break;
@@ -67,5 +79,4 @@ document.addEventListener('keydown', (evt) => {
   }
   render();
 });
-
 
